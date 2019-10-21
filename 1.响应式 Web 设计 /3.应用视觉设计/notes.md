@@ -301,17 +301,139 @@ skewX函数使指定元素沿 X 轴翻转指定的角度，想必你已经猜到
 在上面的例子里，class 为heart元素的:before伪类添加了一个黄色的长方形，长方形的height和width分别为 50px 和 70px。由于设置了其边框半径为 25%，所以长方形为圆角长方形，同时其相对位置为距离left5px，以及向top偏移 50px。
 
 
-40.了解 CSS 的关键帧和动画是如何工作的
+## 40.了解 CSS 的关键帧和动画是如何工作的
+
+如果要给元素添加动画，你需要了解animation属性以及@keyframes规则。animation属性控制动画的外观，@keyframes规则控制动画中各阶段的变化。总共有 8 个animation属性。为了便于理解，本关暂时只涉及到两个最常用的属性。
+
+animation-name设置动画的名称， 也就是要绑定的选择器的@keyframes的名称。
+
+animation-duration设置动画所花费的时间。
+
+@keyframes能够创建动画。 创建动画的原理是将一套 CSS 样式逐渐变化为另一套样式。具体是通过设置动画期间对应的“frames”的 CSS 的属性，以百分比来规定改变的时间，或者通过关键词“from”和“to”，等价于 0% 和 100%。打个比方，CSS 里面的 0% 属性就像是电影里面的开场镜头。CSS 里面的 100% 属性就是元素最后的样子，相当于电影里的演职员表或者鸣谢镜头。CSS 在对应的时间内给元素过渡添加效果。下面举例说明@keyframes和动画属性的用法：
+
+#anim {
+  animation-name: colorful;
+  animation-duration: 3s;
+}
+@keyframes colorful {
+  0% {
+    background-color: blue;
+  }
+  100% {
+    background-color: yellow;
+  }
+}
+id 为anim的元素，代码设置animation-name为colorful，设置animation-duration为 3 秒。然后把@keyframes引用到名为colorful的动画属性上。colorful在动画开始时（0%）设置颜色为蓝色，在动画结束时（100%）设置颜色为黄色。注意不是只有开始和结束的过渡可以设置，0% 到 100% 间的任意百分比你都可以设置。
+
 
 41.使用CSS动画更改按钮的悬停状态
+
+你可以在按钮悬停时使用@keyframes改变按钮的颜色。
+
+下面是在图片悬停时改变图片宽度的例子：
+
+<style>
+  img:hover {
+    animation-name: width;
+    animation-duration: 500ms;
+  }
+
+  @keyframes width {
+    100% {
+      width: 40px;
+    }
+  }
+</style>
+
+<img src="https://bit.ly/smallgooglelogo" alt="Google's Logo" />
+
+注意ms代表毫秒，1000ms 等于 1s。
+
+
 42.修改动画的填充模式
+
+太棒了，但是现在还不完美。注意动画在500ms之后重置了，所以按钮又变成了之前的颜色。而我们想要的效果是按钮在悬停时始终高亮。
+
+这可以通过把animation-fill-mode设置成forwards来实现。animation-fill-mode指定了在动画结束时元素的样式。你可以向这样设置它：
+
+animation-fill-mode: forwards;
+
+
 43.使用 CSS 动画创建运动
+
+当元素的position被指定，如fixed或者relative时，CSS 偏移属性right、left、top和bottom可以用在动画规则里创建动作。
+
+就像下面的例子展示的那样，你可以在50%keyframe 处设置top属性为 50px， 在开始（0%）和最后（100%）keframe 处设置为 0px，以产生项目向下运动，然后返回的动作效果。
+
+@keyframes rainbow {
+  0% {
+    background-color: blue;
+    top: 0px;
+  }
+  50% {
+    background-color: green;
+    top: 50px;
+  }
+  100% {
+    background-color: yellow;
+    top: 0px;
+  }
+}
+
 44.通过从左到右淡化元素来创建视觉方向
+
+当元素的position被指定，如fixed或者relative时，CSS 偏移属性right、left、top和bottom可以用在动画规则里创建动作。
+
+就像下面的例子展示的那样，你可以在50%keyframe 处设置top属性为 50px， 在开始（0%）和最后（100%）keframe 处设置为 0px，以产生项目向下运动，然后返回的动作效果。
+
+@keyframes rainbow {
+  0% {
+    background-color: blue;
+    top: 0px;
+  }
+  50% {
+    background-color: green;
+    top: 50px;
+  }
+  100% {
+    background-color: yellow;
+    top: 0px;
+  }
+}
+
 45.使用无限的动画计数制作永不停止的动画
+
+之前的关卡里介绍了一些动画属性以及@keyframes规则的用法。还有一个常用的动画属性是animation-iteration-count，这个属性允许你控制动画循环的次数。下面是一个例子：
+
+animation-iteration-count: 3;
+
+在这里动画会在运行 3 次后停止，如果想让动画一直运行，可以把值设置成 infinite。
+
 46.使用无限的动画计数制作 CSS 心跳
+
+这也是一个用animation-iteration-count属性创造持续动画的例子，它基于前面关卡创建的心形。
+
+心跳动画的每一秒包含两个部分。heart元素（包括:before和:after）使用transform属性改变其大小，背景div使用background属性改变其颜色。
+
+
 47.以可变速率来给元素添加动画
+
+改变相似元素的动画频率的方法有很多。目前接触到的就有animation-iteration-count和@keyframes。
+
+举例说明，右边的动画包含了两个小星星，每个小星星都在 20%@keyframes处变小并且 opacity 变为 20%，也就是一闪一闪的动画效果。你可以通过改变其中一个星星的@keyframes规则以使两个小星星以不同的频率闪烁。
+
 48.以可变速率来给多个元素添加动画
+
+在前面的关卡里，你通过改变@keyframes改变了两个相似动画元素的频率。你也可以通过改变多个元素的animation-duration来达到同样的效果。
+
+在编辑器代码运行的动画里，天空中有三个以同样频率不停的闪烁的星星。你可以设置每一个星星的animation-duration属性为不同的值来使其具有不同的闪烁频率。
+
 49.使用关键字更改动画定时器
+
+在 CSS 动画里，animation-timing-function规定动画的速度曲线。速度曲线定义动画从一套 CSS 样式变为另一套所用的时间。如果要描述的动画是一辆车在指定时间内（animation-duration）从 A 运动到 B，那么animation-timing-function表述的就是车在运动中的加速和减速等过程。
+
+已经有了很多预定义的值可以直接使用于大部分场景。比如，默认的值是ease，动画以低速开始，然后加快，在结束前变慢。其它常用的值包括ease-out，动画以高速开始，以低速结束;ease-in，动画以低速开始，以高速结束；linear，动画从头到尾的速度是相同的。
+
 50.学习贝塞尔曲线的原理
 51.使用贝塞尔曲线移动图形
 52.使用贝塞尔曲线让运动更加自然
