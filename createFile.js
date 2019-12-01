@@ -1,7 +1,5 @@
 var fs = require("fs");
 
-fs.constants.COPYFILE_FICLONE_FORCE
-
 let filePath =  process.argv[2];
 
 let dirPath =  filePath.replace('notes.md','');
@@ -19,7 +17,7 @@ let rewriteData = ''
 
 array.forEach((str,index)=>{
 
-    let fileName = `${dirPath}${index+1}.${str}.html`;
+    let fileName = `${dirPath}${index+1}.${str}.js`;
 
     //fs.writeFileSync(filePath,)
 
