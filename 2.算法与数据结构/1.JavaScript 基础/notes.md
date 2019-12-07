@@ -1297,9 +1297,96 @@ do {
 如果prop属性不存在，返回"No such property"。
 
 ## 101.使用 JavaScript 生成随机分数
+随机数非常适合用来创建随机行为。
+
+Math.random()用来生成一个在0（包括 0）到1不包括 1）之间的随机小数，因此Math.random()可能返回 0 但绝不会返回 1。
+
+提示
+这一节讲过[Storing Values with the Equal Operator](https://learn.freecodecamp.one/storing-values-with-the-assignment-operator)，所有函数调用将在return执行之前解析，因此我们可以返回Math.random()函数的值。
 ## 102.使用 JavaScript 生成随机整数
+生成随机小数很棒，但随机数更有用的地方在于生成随机整数。
+
+用Math.random()生成一个随机小数。
+把这个随机小数乘以20。
+用Math.floor()向下取整 获得它最近的整数。
+记住Math.random()永远不会返回1。同时因为我们是在用Math.floor()向下取整，所以最终我们获得的结果不可能有20。这确保了我们获得了一个在0到19之间的整数。
+
+把操作连缀起来，代码类似于下面：
+
+Math.floor(Math.random() * 20);
+
+我们先调用Math.random()，把它的结果乘以20，然后把上一步的结果传给Math.floor()，最终通过向下取整获得最近的整数。
 ## 103.生成某个范围内的随机整数
+我们之前生成的随机数是在0到某个数之间，现在我们要生成的随机数是在两个指定的数之间。
+
+我们需要定义一个最小值和一个最大值。
+
+下面是我们将要使用的方法，仔细看看并尝试理解这行代码到底在干嘛：
+
+Math.floor(Math.random() * (max - min + 1)) + min
 ## 104.使用 parseInt 函数
+parseInt()函数解析一个字符串返回一个整数下面是一个示例：
+
+var a = parseInt("007");
+
+上面的函数把字符串 "007" 转换成数字 7。 如果字符串参数的第一个字符是字符串类型的，结果将不会转换成数字，而是返回NaN.
 ## 105.使用 parseInt 函数并传入一个基数
+parseInt()函数解析一个字符串并返回一个整数。它同时可接受第二个参数，一个介于2和36之间的整数，表示字符串的基数。
+
+函数调用如下所示：
+
+parseInt(string, radix);
+
+示例：
+
+var a = parseInt("11", 2);
+
+参数 2 表示 "11" 使用二进制数值系统。此示例将字符串 "11" 转换为整数 3。
 ## 106.使用三元运算符
+条件运算符（也称为三元运算符）的用处就像写成一行的 if-else 表达式
+
+语法如下所示：
+
+condition ? statement-if-true : statement-if-false;
+
+以下函数使用 if-else 语句来检查条件：
+```javascript
+function findGreater(a, b) {
+  if(a > b) {
+    return "a is greater";
+  }
+  else {
+    return "b is greater";
+  }
+}
+```
+上面的函数使用条件运算符写法如下：
+```javascript
+function findGreater(a, b) {
+  return a > b ? "a is greater" : "b is greater";
+}
+```
 ## 107.使用多个三元运算符
+
+在之前的挑战中，你使用了一个条件运算符。你也可以将多个运算符串联在一起以检查多种条件。
+
+下面的函数使用 if，else if 和 else 语句来检查多个条件：
+```javascript
+function findGreaterOrEqual(a, b) {
+  if(a === b) {
+    return "a and b are equal";
+  }
+  else if(a > b) {
+    return "a is greater";
+  }
+  else {
+    return "b is greater";
+  }
+}
+```
+上面的函数使用条件运算符写法如下：
+```javascript
+function findGreaterOrEqual(a, b) {
+  return (a === b) ? "a and b are equal" : (a > b) ? "a is greater" : "b is greater";
+}
+```
