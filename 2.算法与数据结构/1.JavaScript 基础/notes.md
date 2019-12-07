@@ -1160,13 +1160,142 @@ Push 是一个数组方法，详情请查看[Mozilla Developer Network](https://
 你可以参考这一节的内容[Manipulating Complex Objects](https://learn.freecodecamp.one/javascript-algorithms-and-data-structures/basic-javascript/manipulating-complex-objects)复习相关知识。
 
 ## 93.while 循环
+你可以使用循环多次执行相同的代码。
+
+我们将学习的第一种类型的循环称为 "while" 循环，因为它规定，当 "while" 条件为真，循环才会执行，反之不执行。
+```javascript
+var ourArray = [];
+var i = 0;
+while(i < 5) {
+  ourArray.push(i);
+  i++;
+}
+```
+让我们通过 while 循环将值添加到数组中。
+
 ## 94.for 循环
+你可以使用循环多次执行相同的代码。
+
+JavaScript 中最常见的循环就是“for循环”。
+
+for循环中的三个表达式用分号隔开：
+
+for ([初始化]; [条件判断]; [计数器])
+
+<font color="red">初始化</font>语句只会在执行循环开始之前执行一次。它通常用于定义和设置你的循环变量。
+
+条件判断语句会在每一轮循环的开始执行，只要条件判断为true就会继续执行循环。当条件为false的时候，循环将停止执行。这意味着，如果条件在一开始就为false，这个循环将不会执行。
+
+计数器是在每一轮循环结束时执行，通常用于递增或递减。
+
+在下面的例子中，先初始化i = 0，条件i < 5为真，进入第一次循环，执行大括号里的代码，第一次循环结束。递增i的值，条件判断，就这样依次执行下去，直到条件判断为假，整个循环结束。
+```javascript
+var ourArray = [];
+for (var i = 0; i < 5; i++) {
+  ourArray.push(i);
+}
+```
+最终ourArray的值为[0,1,2,3,4].
 ## 95.使用 For 循环遍历数组的奇数
+for循环可以按照我们指定的顺序来迭代，通过更改我们的计数器，我们可以按照偶数顺序来迭代。
+
+初始化i = 0，当i < 10的时候继续循环。
+
+i += 2让i每次循环之后增加2。
+```javascript
+var ourArray = [];
+for (var i = 0; i < 10; i += 2) {
+  ourArray.push(i);
+}
+```
+循环结束后，ourArray的值为[0,2,4,6,8]。
+
+改变计数器，这样我们可以用奇数来数。
 ## 96.使用 For 循环反向遍历数组
+for循环也可以逆向迭代，只要我们定义好合适的条件。
+
+为了能够从后往前两两倒数，我们需要改变我们的初始化，条件判断和计数器。
+
+我们让i = 10，并且当i > 0的时候才继续循环。我们使用i -= 2来让i每次循环递减 2。
+```javascript
+var ourArray = [];
+for (var i=10; i > 0; i-=2) {
+  ourArray.push(i);
+}
+```
+循环结束后，ourArray的值为[10,8,6,4,2]。
+
+让我们改变初始化和计数器，这样我们就可以按照奇数从后往前两两倒着数。
 ## 97.使用 For 循环遍历数组
+迭代输出一个数组的每个元素是 JavaScript 中的常见需求，for循环可以做到这一点。下面的代码将输出数组 arr的每个元素到控制台：
+```javascript
+var arr = [10,9,8,7,6];
+for (var i = 0; i < arr.length; i++) {
+   console.log(arr[i]);
+}
+```
+记住数组的索引从零开始的，这意味着数组的最后一个元素的下标是：数组的长度 -1。我们这个循环的 条件是i < arr.length，当i的值为 长度 -1 的时候循环就停止了。
 ## 98.循环嵌套
+如果你有一个二维数组，可以使用相同的逻辑，先遍历外面的数组，再遍历里面的子数组。下面是一个例子：
+```javascript
+var arr = [
+  [1,2], [3,4], [5,6]
+];
+for (var i=0; i < arr.length; i++) {
+  for (var j=0; j < arr[i].length; j++) {
+    console.log(arr[i][j]);
+  }
+}
+```
+一次输出arr中的每个子元素。提示，对于内部循环，我们可以通过arr[i]的.length来获得子数组的长度，因为arr[i]的本身就是一个数组。
 ## 99. do...while 循环
+这一节我们将要学习的是do...while循环，它会先执行do里面的代码，如果while表达式为真则重复执行，反之则停止执行。我们来看一个例子。
+
+var ourArray = [];
+var i = 0;
+do {
+  ourArray.push(i);
+  i++;
+} while (i < 5);
+这看起来和其他循环语句差不多，返回的结果是[0, 1, 2, 3, 4]，do...while与其他循环不同点在于，初始条件为假时的表现，让我们通过实际的例子来看看。
+
+这是一个普通的 while 循环，只要i < 5，它就会在循环中运行代码。
+
+var ourArray = [];
+var i = 5;
+while (i < 5) {
+  ourArray.push(i);
+  i++;
+}
+注意，我们首先将i的值初始化为 5。执行下一行时，注意到i不小于 5，循环内的代码将不会执行。所以ourArray最终没有添加任何内容，因此示例中的所有代码执行完时，ourArray仍然是[]。
+
+现在，看一下do...while循环。
+```javascript
+var ourArray = [];
+var i = 5;
+do {
+  ourArray.push(i);
+  i++;
+} while (i < 5);
+```
+在这里，和使用 while 循环时一样，我们将i的值初始化为 5。执行下一行时，没有检查i的值，直接执行花括号内的代码。数组会添加一个元素，并在进行条件检查之前递增i。然后，在条件检查时因为i等于 6 不符合条件i < 5，所以退出循环。最终ourArray的值是[5]。
+
+本质上，do...while循环确保循环内的代码至少运行一次。
+
+让我们通过do...while循环将值添加到数组中。
 ## 100.资料查找
+我们有一个对象数组，里面存储着通讯录。
+
+函数lookUp有两个预定义参数：firstName值和prop属性 。
+
+函数将会检查通讯录中是否存在一个与传入的firstName相同的联系人。如果存在，那么还需要检查对应的联系人中是否存在prop属性。
+
+如果它们都存在，函数返回prop属性对应的值。
+
+如果firstName值不存在，返回"No such contact"。
+
+如果prop属性不存在，返回"No such property"。
+
 ## 101.使用 JavaScript 生成随机分数
 ## 102.使用 JavaScript 生成随机整数
 ## 103.生成某个范围内的随机整数
