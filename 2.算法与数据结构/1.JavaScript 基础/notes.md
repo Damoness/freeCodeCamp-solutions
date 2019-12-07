@@ -221,6 +221,7 @@ badStr = 'Finn responds, "Let's go!"'; // 抛出错误
 
 引号不是字符串中唯一可以被转义的字符。使用转义字符有两个原因：首先是可以让你使用无法输入的字符，例如退格。其次是可以让你在一个字符串中表示多个引号，而不会出错。我们在之前的挑战中学到了这个。
 
+```
 代码	输出
 \'	单引号
 \"	双引号
@@ -230,6 +231,7 @@ badStr = 'Finn responds, "Let's go!"'; // 抛出错误
 \t	制表符
 \b	退格
 \f	换页符
+```
 请注意，必须对反斜杠本身进行转义才能显示为反斜杠。
 
 ## 25.用加号运算符连接字符串
@@ -270,9 +272,10 @@ var myStr = "Bob";
 myStr[0] = "J";
 ```
 是不会把变量myStr的值改变成 "Job" 的，因为变量myStr是不可变的。注意，这并不意味着myStr永远不能被改变，只是字符串字面量 string literal 的各个字符不能被改变。改变myStr中的唯一方法是重新给它赋一个值，例如：
-
+```javascript
 var myStr = "Bob";
 myStr = "Job";
+```
 ## 32.使用方括号查找字符串中的第N个字符
 你也可以使用方括号来获得一个字符串中的其他位置的字符。
 
@@ -350,10 +353,11 @@ arr[3][0][1]; // 等于 11
 一个简单的方法将数据添加到一个数组的末尾是通过push()函数。
 
 .push()接受把一个或多个参数，并把它“推”入到数组的末尾。
-
+```javascript
 var arr = [1,2,3];
 arr.push(4);
 // 现在arr的值为 [1,2,3,4]
+```
 ## 42.使用 pop() 操作数组
 改变数组中数据的另一种方法是用.pop()函数。
 
@@ -443,34 +447,453 @@ function myFun() {
 函数myFun将会返回"Head"，因为局部变量优先级更高。
 
 ## 51.函数可以返回某个值
+我们可以通过函数的参数把值传入函数，也可以使用return语句把数据从一个函数中传出来。
+
+示例
+```javascript
+function plusThree(num) {
+    return num + 3;
+}
+var answer = plusThree(5); // 8
+```
+plusThree带有一个num的参数并且返回（returns）一个等于num + 3的值。
 ## 52.函数也可以返回 undefined
+函数一般用return语句来返回值，但这不是必须的。在函数没有return语句的情况下，当你调用它时，该函数会执行内部代码，返回的值是undefined。
+
+示例
+```javascript
+var sum = 0;
+function addSum(num) {
+  sum = sum + num;
+}
+var returnedValue = addSum(3); // sum 会改变，但函数的返回值仍为 undefined
+addSum是一个没有return语句的函数。该函数将更改全局变量sum，函数的返回值为undefined。
+```
 ## 53.用返回值来赋值
+如果你还记得我们在这一节 Storing Values with the Assignment Operator,的讨论，赋值之前，先完成等号右边的操作。这意味着我们可把一个函数的返回值，赋值给一个变量。
+
+假设我们预先定义的函数sum其功能就是将两个数字相加，那么：
+
+ourSum = sum(5, 12);
+
+将调用sum函数，返回return了一个数值17，然后把它赋值给了ourSum变量。
 ## 54.排队
+在计算机科学中队列（queue）是一个抽象的数据结构，队列中的条目都是有秩序的。新的条目会被加到队列的末尾，旧的条目会从队列的头部被移出。
+
+写一个函数nextInLine，用一个数组(arr)和一个数字(item)作为参数。
+
+把数字添加到数组的结尾，然后移出数组的第一个元素。
+
+最后nextInLine函数应该返回被删除的元素。
 ## 55.理解布尔值
+另一种数据类型是布尔（Boolean）。布尔值要么是true要么是false。它非常像电路开关，true是“开”，false是“关”。这两种状态是互斥的。
+
+注意
+布尔值是不带引号的，"true"和"false"是字符串而不是布尔值，在 JavaScript 中也没有特殊含义。
+
 ## 56.用 if 语句来表达条件逻辑
+If语句用于在代码中做条件判断。关键字if告诉 JavaScript 在小括号中的条件为真的情况下去执行定义在大括号里面的代码。这种条件被称为Boolean条件，因为他们只可能是true（真）或false（假）。
+
+当条件的计算结果为true，程序执行大括号内的语句。当布尔条件的计算结果为false，大括号内的代码将不会执行。
+
+伪代码
+```javascript
+if(条件为真){
+    语句被执行
+}
+```
+示例
+```javascript
+function test (myCondition) {
+    if (myCondition) {
+        return "It was true";
+    }
+        return "It was false";
+}
+test(true); // 返回 "It was true"
+test(false); // 返回 "It was false"
+```
+当test被调用，并且传递进来的参数值为true，if语句会计算myCondition的结果，看它是真还是假。如果条件为true，函数会返回"It was true"。当test被调用，并且传递进来的参数值为false，myCondition不 为true，并且不执行大括号后面的语句，函数返回"It was false"。
 ## 57.相等运算符
+在 JavaScript 中，有很多相互比较的操作。所有这些操作符都返回一个true或false值。
+
+最基本的运算符是相等运算符：==。相等运算符比较两个值，如果它们是同等，返回true，如果它们不等，返回false。值得注意的是相等运算符不同于赋值运算符（=），赋值运算符是把等号右边的值赋给左边的变量。
+```javascript
+function equalityTest(myVal) {
+if (myVal == 10) {
+return "Equal";
+}
+return "Not Equal";
+}
+```
+如果myVal等于10，相等运算符会返回true，因此大括号里面的代码会被执行，函数将返回"Equal"。否则，函数返回"Not Equal"。
+
+在 JavaScript 中，为了让两个不同的数据类型（例如数字和字符串）的值可以作比较，它必须把一种类型转换为另一种类型。然而一旦这样做，它可以像下面这样来比较：
+```javascript
+1 == 1 // true
+1 == 2 // false
+1 == '1' // true
+"3" == 3 // true
+```
 ## 58.严格相等运算符
+严格相等运算符（===）是相对相等操作符（==）的另一种比较操作符。与相等操作符不同的是，它会同时比较元素的值和数据类型。
+
+示例
+
+3 === 3 // true
+3 === '3' // false
+3是一个数字类型的，而'3'是一个字符串类型的，所以 3 不全等于 '3'。
 ## 59.比较不同值
+在上两个挑战中，我们学习了相等运算符 (==) 和严格相等运算符 (===)。现在让我们快速回顾并实践一下。
+
+如果要比较的值不是同一类型，相等运算符会先执行数据类型转换，然后比较值。而严格相等运算符只比较值，不会进行数据类型转换。
+
+由此可见，相等运算符和严格相等运算符的区别是：前者会执行隐式类型转换，后者不会。
+
+示例
+```javascript
+3 == '3' // 返回 true，因为 JavaScript 会执行类型转换把字符串 '3' 转化成数字
+3 === '3' // 返回 false，因为类型不同，而这里不会进行类型转换
+```
+提示
+在JavaScript中，你可以使用typeof运算符确定变量的类型或值，如下所示：
+```javascript
+typeof 3 // 返回 'number'
+typeof '3' // 返回 'string'
+```
 ## 60.不等运算符
+不相等运算符（!=）与相等运算符是相反的。这意味着不相等运算符中，如果“不为真”并且返回false的地方，在相等运算符中会返回true，反之亦然。与相等运算符类似，不相等运算符在比较的时候也会转换值的数据类型。
+
+例如
+```javascript
+1 != 2 // true
+1 != "1" // false
+1 != '1' // false
+1 != true // false
+0 != false // false
+```
 ## 61.严格不等运算符
+严格不相等运算符（!==）与全等运算符是相反的。这意味着严格不相等并返回false的地方，用严格相等运算符会返回true，反之亦然。严格相等运算符不会转换值的数据类型。
+
+示例
+```javascript
+3 !== 3 // false
+3 !== '3' // true
+4 !== 3 // true
+```
 ## 62.大于运算符
+使用大于运算符（>）来比较两个数字。如果大于运算符左边的数字大于右边的数字，将会返回true。否则，它返回false。
+
+与相等运算符一样，大于运算符在比较的时候，会转换值的数据类型。
+
+例如
+```javascript
+5 > 3 // true
+7 > '3' // true
+2 > 3 // false
+'1' > 9 // false
+```
 ## 63.大于或等于运算符
+
+使用大于等于运算符（>=）来比较两个数字的大小。如果大于等于运算符左边的数字比右边的数字大或者相等，它会返回true。否则，它会返回false。
+
+与相等运算符相似，大于等于运算符在比较的时候会转换值的数据类型。
+
+例如
+```javascript
+6 >= 6 // true
+7 >= '3' // true
+2 >= 3 // false
+'7' >= 9 // false
+```
 ## 64.小于运算符
+使用小于运算符（<）比较两个数字的大小。如果小于运算符左边的数字比右边的数字小，它会返回true。否则会返回false。与相等运算符类似，小于 运算符在做比较的时候会转换值的数据类型。
+
+例如
+```javascript
+2 < 5 // true
+'3' < 7 // true
+5 < 5 // false
+3 < 2 // false
+'8' < 4 // false
+```
 ## 65.小于或等于运算符
+使用小于等于运算符（<=）比较两个数字的大小。如果在小于等于运算符，左边的数字小于或者等于右边的数字，它会返回true。如果在小于等于运算符，左边的数字大于或者等于右边的数字，它会返回false。与相等运算符类似，小于等于运算符会转换数据类型。
+
+例如
+
+4 <= 5 // true
+'7' <= 7 // true
+5 <= 5 // true
+3 <= 2 // false
+'8' <= 4 // false
 ## 66.逻辑与运算符
+有时你需要在一次判断中做多个操作。当且仅当运算符的左边和右边都是true，逻辑与 运算符（&&）才会返回true。
+
+同样的效果可以通过 if 语句的嵌套来实现：
+```javascript
+if (num > 5) {
+    if (num < 10) {
+    return "Yes";
+    }
+}
+return "No";
+```
+只有当num的值在 6 和 9 之间（包括 6 和 9）才会返回 "Yes"。相同的逻辑可被写为：
+
+if (num > 5 && num < 10) {
+return "Yes";
+}
+return "No";
 ## 67.逻辑或运算符
+只要逻辑或运算符||两边任何一个为true，那么它就返回true；否则返回false。
+
+逻辑或运算符由两个管道符号（|）组成。这个按键位于退格键和回车键之间。
+
+下面这样的语句你应该很熟悉：
+```javascript
+if (num > 10) {
+  return "No";
+}
+if (num < 5) {
+  return "No";
+}
+return "Yes";
+```
+只有当num大于等于 5 或小于等于 10 时，函数返回"Yes"。相同的逻辑可以简写成：
+```javascript
+if (num > 10 || num < 5) {
+  return "No";
+}
+return "Yes";
+```
 ## 68.介绍 else 语句
+当if语句的条件为真，大括号里的代码执行，那如果条件为假呢？正常情况下什么也不会发生。使用else语句，可以执行当条件为假时相应的代码。
+```javascript
+if (num > 10) {
+  return "Bigger than 10";
+} else {
+  return "10 or Less";
+}
+```
 ## 69.介绍 else if 语句
+
+如果你有多个条件语句，你可以通过else if语句把if语句链起来。
+```javascript
+if (num > 15) {
+return "Bigger than 15";
+} else if (num < 5) {
+return "Smaller than 5";
+} else {
+return "Between 5 and 15";
+}
+```
 ## 70.if else 语句中的逻辑顺序
+if、else if语句中代码的执行顺序是很重要的。
+
+在条件判断语句中，代码的执行顺序是从上到下，所以你需要考虑清楚先执行哪一句，后执行哪一句。
+
+这有两个例子。
+
+第一个例子：
+```javascript
+function foo(x) {
+  if (x < 1) {
+    return "Less than one";
+  } else if (x < 2) {
+    return "Less than two";
+  } else {
+    return "Greater than or equal to two";
+  }
+}
+```
+第二个例子更改了代码的执行顺序：
+```javascript
+function bar(x) {
+  if (x < 2) {
+    return "Less than two";
+  } else if (x < 1) {
+    return "Less than one";
+  } else {
+    return "Greater than or equal to two";
+  }
+}
+```
+这两个函数看起来几乎一模一样，我们传一个值进去看看它们有什么区别。
+
+foo(0) // "Less than one"
+bar(0) // "Less than two"
 ## 71.多个 if else 语句
+
+if/else语句串联在一起可以实现复杂的逻辑，这是多个if/else if语句串联在一起的伪代码：
+```javascript
+if (条件 1) {
+  语句 1
+} else if (条件 2) {
+  语句 2
+} else if (条件 3) {
+  语句 3
+. . .
+} else {
+  语句 N
+}
+```
+把if/else if语句串联起来实现下面的逻辑：
+
+num < 5- return "Tiny"
+num < 10- return "Small"
+num < 15- return "Medium"
+num < 20- return "Large"
+num >= 20- return "Huge"
+
 ## 72.高尔夫代码
+
+在高尔夫golf游戏中，每个洞都有自己的标准杆数par，代表着距离。根据你把球打进洞所挥杆的次数strokes，可以计算出你的高尔夫水平。
+
+函数将会传送 2 个参数，分别是标准杆数par和挥杆次数strokes，根据下面的表格返回正确的水平段位。
+```
+Strokes	    Return
+1	        "Hole-in-one!"
+<= par - 2	"Eagle"
+par - 1	    "Birdie"
+par	        "Par"
+par + 1	    "Bogey"
+par + 2	    "Double Bogey"
+>= par + 3	"Go Home!"
+```
+par和strokes必须是数字而且是正数。
+
 ## 73.使用 Switch 语句从许多选项中进行选择
+如果你有非常多的选项需要选择，可以使用 switch 语句。根据不同的参数值会匹配上不同的 case 分支，语句会从第一个匹配的 case 分支开始执行，直到碰到 break 就结束。
+
+这是一个伪代码案例：
+```
+switch(num) {
+  case value1:
+    statement1;
+    break;
+  case value2:
+  statement2;
+    break;
+...
+  case valueN:
+    statementN;
+    break;
+}
+```
+测试case值使用严格相等运算符进行比较，break 关键字告诉 JavaScript 停止执行语句。如果没有 break 关键字，下一个语句会继续执行。
 ## 74.在 Switch 语句中添加默认选项
+在switch语句中你可能无法用 case 来指定所有情况，这时你可以添加 default 语句。当再也找不到 case 匹配的时候 default 语句会执行，非常类似于 if/else 组合中的 else 语句。
+
+default语句应该是最后一个 case。
+```
+switch (num) {
+  case value1:
+    statement1;
+    break;
+  case value2:
+    statement2;
+    break;
+...
+  default:
+    defaultStatement;
+    break;
+}
+```
+写一个根据下面的条件来设置answer的switch语句：
+"a"- "apple"
+"b"- "bird"
+"c"- "cat"
+default- "stuff"
+
 ## 75.在 Switch 语句添加多个相同选项
+如果你忘了给switch的每一条case添加break，那么直到遇见break为止，后续的case会一直执行。如果你想为多个不同的输入设置相同的结果，可以这样写：
+```javascript
+switch(val) {
+  case 1:
+  case 2:
+  case 3:
+    result = "1, 2, or 3";
+    break;
+  case 4:
+    result = "4 alone";
+}
+```
+这样，1、2、3 都会有相同的结果。
 ## 76.用一个 Switch 语句来替代多个 if else 语句
+如果你有多个选项需要选择，switch语句写起来会比多个串联的if/if else语句容易些，譬如:
+```javascript
+if (val === 1) {
+  answer = "a";
+} else if (val === 2) {
+  answer = "b";
+} else {
+  answer = "c";
+}
+```
+可以被下面替代：
+```javascript
+switch(val) {
+  case 1:
+    answer = "a";
+    break;
+  case 2:
+    answer = "b";
+    break;
+  default:
+    answer = "c";
+}
+```
 ## 77.从函数返回布尔值
+你应该还记得相等运算符这道挑战题。在那里我们提到，所有比较操作符都会返回 boolean：要么是true要么是false。
+
+有时人们通过 if/else 语句来做比较然后返回true或false。
+```javascript
+function isEqual(a,b) {
+  if (a === b) {
+    return true;
+  } else {
+    return false;
+  }
+}
+```
+有一个更好的方法，因为===总是返回true或false，所以我们可以直接返回比较的结果：
+```javascript
+function isEqual(a,b) {
+  return a === b;
+}
+```
 ## 78.函数执行到 return 语句就结束
+当代码执行到 return 语句时，函数返回一个结果就结束运行了，return 后面的语句不会执行。
+
+示例
+```javascript
+function myFun() {
+  console.log("Hello");
+  return "World";
+  console.log("byebye")
+}
+myFun();
+```
+上面的代码输出"Hello"到控制台、返回 "World"，但没有输出"byebye"，因为函数遇到 return 语句就退出了。
 ## 79.21点游戏
+在赌场 21 点游戏中，玩家可以通过计算牌桌上已经发放的卡牌的高低值来让自己在游戏中保持优势，这就叫 21 点算法。
+
+根据下面的表格，每张卡牌都分配了一个值。如果卡牌的值大于 0，那么玩家应该追加赌注。反之，追加少许赌注甚至不追加赌注。
+```
+Count Change	Cards
++1	            2, 3, 4, 5, 6
+0	            7, 8, 9
+-1	            10, 'J', 'Q', 'K', 'A'
+```
+你需要写一个函数实现 21 点算法，它根据参数card的值来递增或递减变量count，函数返回一个由当前count和Bet(count>0)或Hold(count<=0) 拼接的字符串。注意count和"Bet"或Hold应该用空格分开。
+
+例如：
+-3 Hold
+5 Bet
+
+提示
+既然 card 的值为 7、8、9 时，count 值不变，那我们就可以忽略这种情况。
 ## 80.新建 JavaScript 对象
 ## 81.通过点符号访问对象属性
 ## 82.通过方括号访问对象属性
@@ -490,7 +913,7 @@ function myFun() {
 ## 96.使用 For 循环反向遍历数组
 ## 97.使用 For 循环遍历数组
 ## 98.循环嵌套
-## 99.do...while 循环
+## 99. do...while 循环
 ## 100.资料查找
 ## 101.使用 JavaScript 生成随机分数
 ## 102.使用 JavaScript 生成随机整数
