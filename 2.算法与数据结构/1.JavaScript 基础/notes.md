@@ -895,18 +895,270 @@ Count Change	Cards
 提示
 既然 card 的值为 7、8、9 时，count 值不变，那我们就可以忽略这种情况。
 ## 80.新建 JavaScript 对象
+你之前可能听说过对象object。
+
+对象和数组很相似，数组是通过索引来访问和修改数据，而对象是通过属性来访问和修改数据。
+
+对象适合用来存储结构化数据，就和真实世界的对象一模一样，比如一只猫。
+
+这是一个对象的示例：
+```javascript
+var cat = {
+  "name": "Whiskers",
+  "legs": 4,
+  "tails": 1,
+  "enemies": ["Water", "Dogs"]
+};
+```
+在这个示例中所有的属性以字符串的形式储存，例如 - "name", "legs"，和"tails"。但是，你也可以使用数字作为属性，你甚至可以省略字符串属性的引号，如下所示：
+```javascript
+var anotherObject = {
+  make: "Ford",
+  5: "five",
+  "model": "focus"
+};
+```
+但是，如果你的对象具有任何非字符串属性，JavaScript 将自动将它们转换为字符串类型。
 ## 81.通过点符号访问对象属性
+有两种方式访问对象属性，一个是点操作符(.)，一个是中括号操作符([])。
+
+当你知道属性的名称的时候，使用点操作符。
+
+这是一个使用点操作符读取对象属性的例子：
+```javascript
+var myObj = {
+  prop1: "val1",
+  prop2: "val2"
+};
+var prop1val = myObj.prop1; // val1
+var prop2val = myObj.prop2; // val2
+```
 ## 82.通过方括号访问对象属性
+第二种访问对象的方式就是中括号操作符([])，如果你想访问的属性的名称有一个空格，这时你只能使用中括号操作符([])。
+
+这是一个使用中括号操作符([])读取对象属性的例子：
+```javascript
+var myObj = {
+  "Space Name": "Kirk",
+  "More Space": "Spock",
+  "NoSpace": "USS Enterprise"
+};
+myObj["Space Name"]; // Kirk
+myObj['More Space']; // Spock
+myObj["NoSpace"]; // USS Enterprise
+```
+提示：属性名称中如果有空格，必须把属性名称用单引号或双引号包裹起来。
+
 ## 83.通过变量访问对象属性
+中括号操作符的另一个使用方式是用变量来访问一个属性。当你需要遍历对象的属性列表或查表时，这种方式极为有用。
+
+这有一个使用变量来访问属性的例子：
+```javascript
+var dogs = {
+  Fido: "Mutt", Hunter: "Doberman", Snoopie: "Beagle"
+};
+var myDog = "Hunter";
+var myBreed = dogs[myDog];
+console.log(myBreed); // "Doberman"
+```
+还有更多：
+```javascript
+var someObj = {
+  propName: "John"
+};
+function propPrefix(str) {
+  var s = "prop";
+  return s + str;
+}
+```
+var someProp = propPrefix("Name"); // someProp 现在的值为 'propName'
+console.log(someObj[someProp]); // 输出 "John"
+提示：当我们通过变量名访问属性的时候，不需要给变量名包裹引号。因为实际上我们使用的是变量的值，而不是变量的名称。
+
+
 ## 84.更新对象属性
+当你创建了一个对象后，你可以用点操作符或中括号操作符来更新对象的属性。
+
+举个例子，让我们看看ourDog:
+```javascript
+var ourDog = {
+  "name": "Camper",
+  "legs": 4,
+  "tails": 1,
+  "friends": ["everything!"]
+};
+```
+让我们更改它的名称为 "Happy Camper"，这有两种方式来更新对象的name属性：
+
+ourDog.name = "Happy Camper";或
+
+ourDog["name"] = "Happy Camper";
+
+现在，ourDog.name的值就不再是 "Camper"，而是 "Happy Camper"。
+
+
 ## 85.给对象添加新属性
+
+你也可以像更改属性一样给对象添加属性。
+
+看看我们是如何给ourDog添加"bark"属性：
+
+ourDog.bark = "bow-wow";
+
+或者
+
+ourDog["bark"] = "bow-wow";
+
+现在当我们访问ourDog.bark时会得到 ourDog 的 bark 值 "bow-wow".
+
 ## 86.删除对象的属性
+我们同样可以删除对象的属性，例如：
+
+delete ourDog.bark;
+
 ## 87.使用对象进行查找
+对象和字典一样，可以用来存储键/值对。如果你的数据跟对象一样，你可以用对象来查找你想要的值，而不是使用switch或if/else语句。当你知道你的输入数据在某个范围时，这种查找方式极为有效。
+
+这是简单的反向字母表：
+```javascript
+var alpha = {
+  1:"Z",
+  2:"Y",
+  3:"X",
+  4:"W",
+  ...
+  24:"C",
+  25:"B",
+  26:"A"
+};
+alpha[2]; // "Y"
+alpha[24]; // "C"
+
+var value = 2;
+alpha[value]; // "Y"
+```
 ## 88.测试对象的属性
+有时检查一个对象属性是否存在是非常有用的，我们可以用.hasOwnProperty(propname)方法来检查对象是否有该属性。如果有返回true，反之返回false。
+
+示例
+```javascript
+var myObj = {
+  top: "hat",
+  bottom: "pants"
+};
+myObj.hasOwnProperty("top"); // true
+myObj.hasOwnProperty("middle"); // false
+```
 ## 89.操作复杂对象
+有时你可能希望将数据存储在灵活的数据结构中。JavaScript 对象是处理灵活数据的一种方法。它可以储存字符串，数字，布尔值，函数，和对象以及这些值的任意组合。
+
+这是一个复杂数据结构的示例：
+```javascript
+var ourMusic = [
+  {
+    "artist": "Daft Punk",
+    "title": "Homework",
+    "release_year": 1997,
+    "formats": [
+      "CD",
+      "Cassette",
+      "LP"
+    ],
+    "gold": true
+  }
+];
+```
+这是一个对象数组，并且对象有各种关于专辑的 详细信息。它也有一个嵌套的formats的数组。附加专辑记录可以被添加到数组的最上层。
+
+对象将数据以一种键-值对的形式保存。在上面的示例中，"artist": "Daft Punk"是一个具有"artist"键和"Daft Punk"值的属性。
+
+JavaScript Object Notation 简称JSON是用于存储数据的相关数据交换格式。
+```javascript
+{
+  "artist": "Daft Punk",
+  "title": "Homework",
+  "release_year": 1997,
+  "formats": [
+    "CD",
+    "Cassette",
+    "LP"
+  ],
+  "gold": true
+}
+```
+提示
+数组中有多个 JSON 对象的时候，对象与对象之间要用逗号隔开。
+
 ## 90.访问嵌套对象
+通过串联起来的点操作符或中括号操作符来访问对象的嵌套属性。
+
+下面是一个嵌套的对象：
+```javascript
+var ourStorage = {
+  "desk": {
+    "drawer": "stapler"
+  },
+  "cabinet": {
+    "top drawer": {
+      "folder1": "a file",
+      "folder2": "secrets"
+    },
+    "bottom drawer": "soda"
+  }
+};
+ourStorage.cabinet["top drawer"].folder2; // "secrets"
+ourStorage.desk.drawer; // "stapler"
+```
 ## 91.访问嵌套数组
+正如我们在前面的例子所见，对象可以嵌套对象和数组。与访问嵌套对象一样，用中括号操作符同样可以访问嵌套数组。
+
+下面是如何访问嵌套数组的例子：
+```javascript
+var ourPets = [
+  {
+    animalType: "cat",
+    names: [
+      "Meowzer",
+      "Fluffy",
+      "Kit-Cat"
+    ]
+  },
+  {
+    animalType: "dog",
+    names: [
+      "Spot",
+      "Bowser",
+      "Frankie"
+    ]
+  }
+];
+ourPets[0].names[1]; // "Fluffy"
+ourPets[1].names[0]; // "Spot"
+```
 ## 92.记录集合
+你将获得一个 JSON 对象，用来表示你的部分音乐专辑收藏。每张专辑都有几个属性和一个唯一的 id 号作为键值。并非所有专辑都有完整的信息。
+
+写一个函数，根据传入的id（如2548）、prop（属性，如"artist"或"tracks"）以及value（值，如"Addicted to Love"）来修改音乐专辑收藏的数据。
+
+如果属性prop不是"tracks"且值value不为空（""），则更新或设置该专辑属性的值value。
+
+你的函数必须始终返回整个音乐专辑集合对象。
+
+处理不完整数据有几条规则：
+
+如果属性prop是"tracks"，但是专辑没有"tracks"属性，则在添加值之前先给"tracks"创建一个空数组。
+
+如果prop是"tracks"，并且值value不为空（""）， 把值value添加到tracks数组中。
+
+如果值value为空（""），则删除专辑的这一属性prop
+
+提示：
+当[通过变量访问对象的属性](https://learn.freecodecamp.one/javascript-algorithms-and-data-structures/basic-javascript/accessing-object-properties-with-variables)时，应使用中括号。
+
+Push 是一个数组方法，详情请查看[Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push).
+
+你可以参考这一节的内容[Manipulating Complex Objects](https://learn.freecodecamp.one/javascript-algorithms-and-data-structures/basic-javascript/manipulating-complex-objects)复习相关知识。
+
 ## 93.while 循环
 ## 94.for 循环
 ## 95.使用 For 循环遍历数组的奇数
