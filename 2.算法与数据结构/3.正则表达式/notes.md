@@ -171,20 +171,172 @@ oPhrase.match(goRegex); // Returns null
 但是，你可以使用`?`字符来将其变成`懒惰`匹配。调整后的正则表达式`/t[a-z]*?i/`匹配字符串"titanic"返回`["ti"]`。
 
 ## 15.在狩猎中找到一个或多个罪犯
+是时候暂停和测试你的新正则表达式写作技巧了。一群罪犯逃出监狱逃跑，但你不知道有多少人。但是，你知道他们和其他人在一起时会保持紧密联系。你有责任立刻找到所有的罪犯。
+
+这里有一个示例来回顾如何做到这一点：
+
+当字母z在一行中出现一次或连续多次时，正则表达式/z+/会匹配到它。它会在以下所有字符串中找到匹配项：
+```js
+"z"
+"zzzzzz"
+"ABCzzzz"
+"zzzzABC"
+"abczzzzzzzzzzzzzzzzzzzzzabc"
+```
+但是它不会在以下字符串中找到匹配项，因为它们中没有字母z：
+```js
+""
+"ABC"
+"abcabc"
+```
+编写一个贪婪正则表达式，在一组其他人中匹配到一个或多个罪犯。罪犯由大写字母C表示。
 ## 16.匹配字符串的开头
+先前的挑战表明，正则表达式可以用于查找许多匹配项。它们还用于搜寻字符串中特定位置的匹配模式。
+
+在之前的挑战中，你使用`字符集`中的`插入`符号（^）来创建一个`否定字符集`，形如`[^thingsThatWillNotBeMatched]`。在`字符集`之外，`插入`符号用于字符串的开头搜寻匹配模式。
+```js
+let firstString = "Ricky is first and can be found.";
+let firstRegex = /^Ricky/;
+firstRegex.test(firstString);
+// Returns true
+let notFirst = "You can't find Ricky now.";
+firstRegex.test(notFirst);
+// Returns false
+```
 ## 17.匹配字符串的末尾
+
+在上一个挑战中，你学习了使用^符号来搜寻字符串开头的匹配模式。还有一种方法可以搜寻字符串末尾的匹配模式。
+
+你可以使用正则表达式的`美元`符号`$`来搜寻字符串的结尾。
+```js
+let theEnding = "This is a never ending story";
+let storyRegex = /story$/;
+storyRegex.test(theEnding);
+// Returns true
+let noEnding = "Sometimes a story will have to end";
+storyRegex.test(noEnding);
+// Returns false
+```
 ## 18.匹配所有的字母和数字
+使用字符类，你可以使用[a-z]搜寻字母表中的所有字母。这种字符类是很常见的，它有一个缩写，但这个缩写也包含额外的字符。
+
+JavaScript 中与字母表匹配的最接近的字符类是\w，这个缩写等同于[A-Za-z0-9_]。它不仅可以匹配大小写字母和数字，注意，它还会匹配下划线字符（_）。
+```js
+let longHand = /[A-Za-z0-9_]+/;
+let shortHand = /\w+/;
+let numbers = "42";
+let varNames = "important_var";
+longHand.test(numbers); // Returns true
+shortHand.test(numbers); // Returns true
+longHand.test(varNames); // Returns true
+shortHand.test(varNames); // Returns true
+```
 ## 19.匹配除了字母和数字的所有符号
+你已经了解到可以使用缩写\w来匹配字母和数字[A-Za-z0-9_]。不过，有可能你想要搜寻的匹配模式与字母数字相反。
+
+你可以使用\W搜寻和\w相反的匹配模式。注意，相反匹配模式使用大写字母。此缩写与[^A-Za-z0-9_]是一样的。
+```js
+let shortHand = /\W/;
+let numbers = "42%";
+let sentence = "Coding!";
+numbers.match(shortHand); // Returns ["%"]
+sentence.match(shortHand); // Returns ["!"]
+```
 ## 20.匹配所有数字
+你已经了解了常见字符串匹配模式和缩写，如字母数字。另一个常见的匹配模式是只寻找数字。
+
+查找数字字符的缩写是`\d`，注意是小写的`d`。这等同于字符类`[0-9]`，它查找 0 到 9 之间任意数字的单个字符。
 ## 21.匹配所有非数字
+上一项挑战中展示了如何使用带有小写`d`的缩写`\d`来搜寻数字。你也可以使用类似的缩写来搜寻非数字，该缩写使用大写的`D`。
+
+查找非数字字符的缩写是`\D`。这等同于字符串`[^0-9]`，它查找不是 0 - 9 之间数字的单个字符。
 ## 22.限制可能的用户名
+用户名在互联网上随处可见。它们是用户在自己喜欢的网站上的唯一身份。
+
+你需要检查数据库中的所有用户名。以下是用户在创建用户名时必须遵守的一些简单规则。
+
+1) 用户名中的数字必须在最后，且数字可以有零个或多个。
+
+2) 用户名字母可以是小写字母和大写字母。
+
+3) 用户名长度必须至少为两个字符。两位用户名只能使用字母。
 ## 23.匹配空白字符
+迄今为止的挑战包括匹配的字母和数字。你还可以匹配字母之间的空格。
+
+你可以使用`\s`搜寻空格，其中s是小写。此匹配模式不仅匹配空格，还匹配回车符、制表符、换页符和换行符，你可以将其视为与[\r\t\f\n\v]类似。
+```js
+let whiteSpace = "Whitespace. Whitespace everywhere!"
+let spaceRegex = /\s/g;
+whiteSpace.match(spaceRegex);
+// Returns [" ", " "]
+```
 ## 24.匹配非空白字符
+你已经学会了如何使用带有小写s的缩写\s来搜寻空白字符。你也可以搜寻除了空格之外的所有内容。
+
+使用\S搜寻非空白字符，其中S是大写。此匹配模式将不匹配空格、回车符、制表符、换页符和换行符。你可以认为这类似于字符类[^\r\t\f\n\v]。
+```js
+let whiteSpace = "Whitespace. Whitespace everywhere!"
+let nonSpaceRegex = /\S/g;
+whiteSpace.match(nonSpaceRegex).length; // Returns 32
+```
 ## 25.指定匹配的上限和下限
+回想一下，你使用加号`+`查找一个或多个字符，使用星号`*`查找零个或多个字符。这些都很方便，但有时你需要匹配一定范围的匹配模式。
+
+你可以使用`数量说明符`指定匹配模式的上下限。数量说明符与花括号（`{`和`}`）一起使用。你可以在花括号之间放两个数字，这两个数字代表匹配模式的上限和下限。
+
+例如，要在字符串"ah"中匹配仅出现3到5次的字母a，你的正则表达式应为`/a{3,5}h/`。
+```js
+let A4 = "aaaah";
+let A2 = "aah";
+let multipleA = /a{3,5}h/;
+multipleA.test(A4); // Returns true
+multipleA.test(A2); // Returns false
+```
 ## 26.只指定匹配的下限
+你可以使用带有花括号的`数量说明符`来指定匹配模式的上下限。但有时候你只想指定匹配模式的下限而不需要指定上限。
+
+为此，在第一个数字后面跟一个逗号即可。
+
+例如，要匹配至少出现`3`次字母a的字符串`"hah"`，你的正则表达式应该是`/ha{3,}h/`。
+```js
+let A4 = "haaaah";
+let A2 = "haah";
+let A100 = "h" + "a".repeat(100) + "h";
+let multipleA = /ha{3,}h/;
+multipleA.test(A4); // Returns true
+multipleA.test(A2); // Returns false
+multipleA.test(A100); // Returns true
+```
 ## 27.指定匹配的确切数量
+你可以使用带有花括号的数量说明符来指定匹配模式的上下限。但有时你只需要特定数量的匹配。
+
+要指定一定数量的匹配模式，只需在大括号之间放置一个数字。
+
+例如，要只匹配字母a出现3次的单词"hah"，你的正则表达式应为/ha{3}h/。
+```js
+let A4 = "haaaah";
+let A3 = "haaah";
+let A100 = "h" + "a".repeat(100) + "h";
+let multipleHA = /a{3}h/;
+multipleHA.test(A4); // Returns false
+multipleHA.test(A3); // Returns true
+multipleHA.test(A100); // Returns false
+```
 ## 28.检查全部或无
+有时，你想要搜寻的匹配模式可能有不确定是否存在的部分。尽管如此，你还是想检查它们。
+
+为此，你可以使用问号?指定可能存在的元素。这将检查前面的零个或一个元素。你可以将此符号视为前面的元素是可选的。
+
+例如，美式英语和英式英语略有不同，你可以使用问号来匹配两种拼写。
+```js
+let american = "color";
+let british = "colour";
+let rainbowRegex= /colou?r/;
+rainbowRegex.test(american); // Returns true
+rainbowRegex.test(british); // Returns true
+```
 ## 29.正向先行断言和负向先行断言
+
 ## 30.使用捕获组重用模式
 ## 31.使用捕获组搜索和替换
 ## 32.删除开头和结尾的空白
