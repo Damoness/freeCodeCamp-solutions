@@ -335,8 +335,64 @@ let rainbowRegex= /colou?r/;
 rainbowRegex.test(american); // Returns true
 rainbowRegex.test(british); // Returns true
 ```
-## 29.正向先行断言和负向先行断言
+## 29.正向先行断言和负向先行断言 *
+`先行断言`是告诉 JavaScript 在字符串中向前查找的匹配模式。当你想要在同一个字符串上搜寻多个匹配模式时，这可能非常有用。
 
-## 30.使用捕获组重用模式
+有两种`先行断言`：`正向先行断言`和`负向先行断言`。
+
+正向先行断言会查看并确保搜索匹配模式中的元素存在，但实际上并不匹配。正向先行断言的用法是(?=...)，其中...就是需要存在但不会被匹配的部分。
+
+另一方面，`负向先行断言`会查看并确保搜索匹配模式中的元素不存在。负向先行断言的用法是(?!...)，其中...是你希望不存在的匹配模式。如果负向先行断言部分不存在，将返回匹配模式的其余部分。
+
+尽管先行断言有点儿令人困惑，但是这些示例会有所帮助。
+```js
+let quit = "qu";
+let noquit = "qt";
+let quRegex= /q(?=u)/;
+let qRegex = /q(?!u)/;
+quit.match(quRegex); // Returns ["q"]
+noquit.match(qRegex); // Returns ["q"]
+```
+`先行断言`的更实际用途是检查一个字符串中的两个或更多匹配模式。这里有一个简单的密码检查器，密码规则是 3 到 6 个字符且至少包含一个数字：
+```js
+let password = "abc123";
+let checkPass = /(?=\w{3,6})(?=\D*\d)/;
+checkPass.test(password); // Returns true
+```
+## 30.使用捕获组重用模式 
+
+一些你所搜寻的匹配模式会在字符串中出现多次，手动重复该正则表达式太浪费了。有一种更好的方法可以指定何时在字符串中会有多个重复的子字符串。
+
+你可以使用`捕获组`搜寻重复的子字符串。括号(和)可以用来匹配重复的子字符串。你只需要把重复匹配模式的正则表达式放在括号中即可。
+
+要指定重复字符串将出现的位置，可以使用反斜杠（`\`）后接一个数字。这个数字从 1 开始，随着你使用的每个捕获组的增加而增加。这里有一个示例，`\1`可以匹配第一个组。
+
+下面的示例匹配任意两个被空格分割的单词：
+```js
+let repeatStr = "regex regex";
+let repeatRegex = /(\w+)\s\1/;
+repeatRegex.test(repeatStr); // Returns true
+repeatStr.match(repeatRegex); // Returns ["regex regex", "regex"]
+```
+在字符串上使用.match()方法将返回一个数组，其中包含它匹配的字符串及其捕获组。
+
+
 ## 31.使用捕获组搜索和替换
-## 32.删除开头和结尾的空白
+
+搜索功能是很有用的。但是，当你的搜索也执行更改（或替换）匹配文本的操作时，搜索功能就会显得更加强大。
+
+可以使用字符串上`.replace()`方法来搜索并替换字符串中的文本。`.replace()`的输入首先是你想要搜索的正则表达式匹配模式，第二个参数是用于替换匹配的字符串或用于执行某些操作的函数。
+```js
+let wrongText = "The sky is silver.";
+let silverRegex = /silver/;
+wrongText.replace(silverRegex, "blue");
+// Returns "The sky is blue."
+```
+你还可以使用美元符号（$）访问替换字符串中的捕获组。
+```js
+"Code Camp".replace(/(\w+)\s(\w+)/, '$2 $1');
+// Returns "Camp Code"
+```
+## 32.删除开头和结尾的空白 *
+有时字符串周围存在的空白字符并不是必需的。字符串的典型处理是删除字符串开头和结尾处的空格。
+
