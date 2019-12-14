@@ -1,0 +1,19 @@
+// 全局变量
+var s = [23, 65, 98, 5];
+
+Array.prototype.myFilter = function(callback){
+  var newArray = [];
+  // 请在本行以下添加你的代码
+  this.forEach(item=>{
+    if(callback(item)){
+      newArray.push(item);
+    }
+  })
+  // 请在本行以上添加你的代码
+  return newArray;
+
+};
+
+var new_s = s.myFilter(function(item){
+  return item % 2 === 1;
+});
