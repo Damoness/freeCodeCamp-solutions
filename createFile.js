@@ -17,7 +17,7 @@ let rewriteData = ''
 
 array.forEach((str,index)=>{
 
-    let fileName = `${dirPath}${index+1}.${str}.js`;
+    let fileName = `${dirPath}${index+1}.${str}.html`;
 
     //fs.writeFileSync(filePath,)
 
