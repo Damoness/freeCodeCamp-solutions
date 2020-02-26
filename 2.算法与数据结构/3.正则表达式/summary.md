@@ -52,9 +52,13 @@
 - {} : 指定匹配模式的上下限 ; /a{3,5}h/ 要在字符串"ah"中匹配仅出现3到5次的字母a ; 可以只匹配下线, 如 /ha{3,}h/
 
 
-- 正向断言 (Positive Lookahead) : 将会保证这个匹配在那里,但不会实际的匹配; (?...)
+- 正向先行断言 (Positive Lookahead) : 将会保证断言的匹配在那里,但不会实际的匹配; (?=...)
 
-- 负向断言 (Negative Lookahead) : 将会保证这个匹配不在那里,但不会实际的匹配 ; (?!...)
+<pre>
+"(T|t)he(?!\sfat)" => The fat cat sat on <a href="#learn-regex"><strong>the</strong></a> mat.
+</pre>
+
+- 负向先行断言 (Negative Lookahead) : 将会保证这个匹配不在那里,但不会实际的匹配 ; (?!...)
 
 
 - 捕获组 : 匹配模式的复用, 用()包起来, 用\数字 引用 ;
@@ -64,4 +68,14 @@
         repeatRegex.test(repeatStr); // Returns true
         repeatStr.match(repeatRegex); // Returns ["regex regex", "regex"]
     ```
+
+
+
+## 扩展阅读
+
+[learn-regex](https://github.com/ziishaned/learn-regex)
+
+[MDN正则表达式](https://wiki.developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions)
+
+[在线测试正则](https://regex101.com/)
 
