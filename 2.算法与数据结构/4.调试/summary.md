@@ -1,15 +1,15 @@
 
-console.log
+## console.log 和 console.clear
 
-console.clear
+## typeof 判断数据类型
+七种类型
+string,number,null,undefined,boolean,symbol 和 object
 
-typeof :  判断数据类型
+## {} , "", '' ,[] 注意配对
 
-{} , "", '' ,[] 注意配对
+## 函数参数顺序
 
+## 数组索引
 
-函数参数顺序
+## 循环条件
 
-数组索引
-
-循环条件
