@@ -28,14 +28,10 @@ indexOf : 数组检查元素是否存在
 
 ## 对象的操作
 
+1. delete : 删除某个属性
 
-delete : 删除某个属性
+2. 对象拥有某个属性: hasOwnProperty() 和 in
 
-对象拥有某个属性:
-in 
-hasOwnProperty()
+3. 遍历key : for ... in 
 
-遍历key
-for ... in 
-
-Object.keys()
+4. Object.keys()

@@ -126,3 +126,5 @@ align-self的允许值与align-items一样，并且它会覆盖align-items的值
 [A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
 
 [Flexbox布局详解](http://caibaojian.com/flexbox-guide.html)
+
+[Flexbox](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox)
